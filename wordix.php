@@ -27,7 +27,8 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 /**************************************/
 
 /**
- *  ****COMPLETAR*****
+ *  ****COMPLETADO*****
+ * 
  */
 function solicitarNumeroEntre($min, $max)
 {
