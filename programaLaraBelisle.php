@@ -49,8 +49,10 @@ function cargarPartidas(){
         array("palabraWordix"=>"MELON", "jugador" => "pink2000", "intentos" => 6,"puntaje"=>6),
         array("palabraWordix"=>"FUEGO", "jugador" => "majo", "intentos" => 2,"puntaje"=>7),
         array("palabraWordix"=>"YUYOS", "jugador" => "willyrex", "intentos" => 3,"puntaje"=>9),
-    ];
-    
+    ];}
+    function resumen($coleccionPalabras){
+
+    $resumenJugador[];
 
 
 }
