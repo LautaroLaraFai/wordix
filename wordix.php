@@ -27,8 +27,11 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 /**************************************/
 
 /**
- *  ****COMPLETAR*****
- * PREGUNTAR PARA QUE SIRVE ESTA FUNCION
+ *  ****COMPLETADO*****
+ * Este modulo sirve para que el numero que el usuario ingrese sea valido y retorna el numero valido
+ * @param int $min
+ * @param int $max
+ * @return int
  */
 function solicitarNumeroEntre($min, $max)
 {
@@ -337,7 +340,9 @@ function esIntentoGanado($estructuraPalabraIntento)
 
 /**
  * ****COMPLETAR***** documentación de la intefaz
- * PREGUNTAR POR EL RETURN 0
+ * Este modulo calcula el puntaje que el usuario obtuvo
+ * @param
+ * @return
  */
 function obtenerPuntajeWordix()  /* ****COMPLETAR***** parámetros formales necesarios */
 {
