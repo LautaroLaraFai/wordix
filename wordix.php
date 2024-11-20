@@ -394,6 +394,7 @@ function obtenerPuntajeWordix($nroIntento,$palabra)  /* ****COMPLETAR***** pará
             $valorLetra=2;
             break;
         //hay que hacer lo mismo con cada letra
+        //se puede hacer otra funcion donde se vea si una letra es vocal o no
         }
 /**
  * Dada una palabra para adivinar, juega una partida de wordix intentando que el usuario adivine la palabra.
