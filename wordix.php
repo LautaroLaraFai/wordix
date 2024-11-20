@@ -344,9 +344,10 @@ function esIntentoGanado($estructuraPalabraIntento)
  * @param
  * @return
  */
-function obtenerPuntajeWordix($nroIntento,$palabraWordix)  /* ****COMPLETAR***** parámetros formales necesarios */
+function obtenerPuntajeWordix($nroIntento,$palabra)  /* ****COMPLETAR***** parámetros formales necesarios */
 {
     /* ****COMPLETAR***** cuerpo de la función*/
+    $puntaje=0;
     switch($nroIntento){
         case 1: 
             $puntaje=6;
@@ -371,9 +372,29 @@ function obtenerPuntajeWordix($nroIntento,$palabraWordix)  /* ****COMPLETAR*****
             break;
     }
 
+    for ($i=0;$i<strlen($palabra);$i++){
+        $puntoLetra=valorLetra($palabra[$i]);
+        $puntaje+=$puntoLetra;    
+    }
+
+
     return 0;
 }
 
+/** 
+ * Este modulo 
+ */
+
+ function valorLetra($palabra){}
+    switch($palabra){
+        case "A": 
+            $valorLetra=1;
+            break;
+        case "B":
+            $valorLetra=2;
+            break;
+        //hay que hacer lo mismo con cada letra
+        }
 /**
  * Dada una palabra para adivinar, juega una partida de wordix intentando que el usuario adivine la palabra.
  * @param string $palabraWordix
