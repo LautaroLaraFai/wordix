@@ -22,8 +22,8 @@ include_once("wordix.php");
  * Obtiene una colección de palabras
  * @return array
  */
-function cargarColeccionPalabras()
-{
+function cargarColeccionPalabras(){
+    //array[] $coleccionPalabras
     $coleccionPalabras = [
         "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
         "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES",
