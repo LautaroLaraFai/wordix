@@ -376,6 +376,8 @@ function obtenerPuntajeWordix($nroIntento,$palabra)  /* ****COMPLETAR***** pará
         $puntoLetra=valorLetra($palabra[$i]);
         $puntaje+=$puntoLetra;    
     }
+
+
     return 0;
 }
 
