@@ -32,7 +32,7 @@ function cargarColeccionPalabras(){
         "PERRO", "TRIGO", "VAGOS", "MONTE", "TRAPO"
     ];
 
-    return ($coleccionPalabras);
+    return $coleccionPalabras;
 }
 
 /* ****A MEDIO COMPLETAR***** */
@@ -51,13 +51,24 @@ function cargarPartidas(){
         array("palabraWordix"=>"FUEGO", "jugador" => "majo", "intentos" => 2,"puntaje"=>7),
         array("palabraWordix"=>"YUYOS", "jugador" => "sebastian", "intentos" => 3,"puntaje"=>9),
     ];}
+function solicitarJugador(){
+    //preguntar si se tiene que volver a preguntar el nombre si la primera letra no es una letra
+    echo "ingrese nombre de usuario: ";
+    $nombre=trim(fgets(STDIN));
+    $nombre=strtolower($nombre);
+    ctype_alpha($nombre[0]);
 
-function menu(){
+    return $nombre;
+}
+function seleccionarOpcion(){
     echo "Menu \n 1) Jugar al wordix con una palabra elegida \n 2) Jugar al wordix con una palabra aleatoria \n 3) Mostrar una partida \n 4) Mostrar la primer partida ganadora \n 5) Mostrar resumen de jugador \n 6) Mostrar listados de partidas ordenados por jugador y palabra \n 7) Agregar una palabra de 5 letras al wordix \n 8) Salir \n" ;
     $min=1;
     $max=8;
     $opcion=solicitarNumeroEntre($min, $max);
     }
+
+    //puede ser cambiado al algoritmo principal
+    leerPalabra5Letras();
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
@@ -70,6 +81,10 @@ function menu(){
 
 
 //Proceso:
+
+$coleccionPalabras=cargarColeccionPalabras();
+$coleccionPartidas=cargarPartidas();
+seleccionarOpcion();
 
 $partida = jugarWordix("MELON", strtolower("MaJo"));
 //print_r($partida);

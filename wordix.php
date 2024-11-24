@@ -375,7 +375,7 @@ function obtenerPuntajeWordix($nroIntento,$palabra)  /* ****COMPLETADO***** par√
             break;
     }
     $palabra=strtolower($palabra);
-    for ($i=0;$i<strlen($palabra);$i++){
+    for ($i=0;$i<=strlen($palabra);$i++){
         $letra=$palabra[$i];
         if($letra="a"||$letra="e"||$letra="i"||$letra="o"||$letra="u"){
             $valorLetra=1;
@@ -389,21 +389,6 @@ function obtenerPuntajeWordix($nroIntento,$palabra)  /* ****COMPLETADO***** par√
     return $puntaje;
 }
 
-/** 
- * Este modulo 
- */
-
- function valorLetra($palabra){}
-    switch($palabra){
-        case "A": 
-            $valorLetra=1;
-            break;
-        case "B":
-            $valorLetra=2;
-            break;
-        //hay que hacer lo mismo con cada letra
-        //se puede hacer otra funcion donde se vea si una letra es vocal o no
-        }
 /**
  * Dada una palabra para adivinar, juega una partida de wordix intentando que el usuario adivine la palabra.
  * @param string $palabraWordix
