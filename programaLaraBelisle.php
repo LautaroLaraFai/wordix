@@ -43,17 +43,17 @@ function cargarPartidas(){
         array("palabraWordix"=>"QUESO", "jugador" => "majo", "intentos" => 0,"puntaje"=>0),
         array("palabraWordix"=>"CASAS", "jugador" => "rudolf", "intentos" => 3,"puntaje"=>14),
         array("palabraWordix"=>"QUESO", "jugador" => "pink2000", "intentos" => 6,"puntaje"=>10),
-        array("palabraWordix"=>"PERRO", "jugador" => "tfue", "intentos" => 4,"puntaje"=>4),
+        array("palabraWordix"=>"PERRO", "jugador" => "ricardo", "intentos" => 4,"puntaje"=>4),
         array("palabraWordix"=>"TRIGO", "jugador" => "ninja", "intentos" => 2,"puntaje"=>12),
         array("palabraWordix"=>"HUEVO", "jugador" => "majo", "intentos" => 1,"puntaje"=>7),
         array("palabraWordix"=>"TRAPO", "jugador" => "lautaro", "intentos" => 5,"puntaje"=>18),
         array("palabraWordix"=>"MELON", "jugador" => "pink2000", "intentos" => 6,"puntaje"=>6),
         array("palabraWordix"=>"FUEGO", "jugador" => "majo", "intentos" => 2,"puntaje"=>7),
-        array("palabraWordix"=>"YUYOS", "jugador" => "willyrex", "intentos" => 3,"puntaje"=>9),
+        array("palabraWordix"=>"YUYOS", "jugador" => "sebastian", "intentos" => 3,"puntaje"=>9),
     ];}
     function resumen($coleccionPalabras){
 
-    $resumenJugador[];
+    //$resumenJugador[];
 
 
 }
@@ -70,6 +70,9 @@ function cargarPartidas(){
 
 
 //Proceso:
+echo "Menu \n 1) Jugar al wordix con una palabra elegida \n 2) Jugar al wordix con una palabra aleatoria
+    \n 3) Mostrar una partida \n 4) Mostrar la primer partida ganadora \n 5) Mostrar resumen de jugador \n 
+    6) Mostrar listados de partidas ordenados por jugador y palabra \n 7) Agregar una palabra de 5 letras al wordix \n 8) Salir \n" ;
 
 $partida = jugarWordix("MELON", strtolower("MaJo"));
 //print_r($partida);
