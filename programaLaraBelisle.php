@@ -51,13 +51,13 @@ function cargarPartidas(){
         array("palabraWordix"=>"FUEGO", "jugador" => "majo", "intentos" => 2,"puntaje"=>7),
         array("palabraWordix"=>"YUYOS", "jugador" => "sebastian", "intentos" => 3,"puntaje"=>9),
     ];}
-    function resumen($coleccionPalabras){
 
-    //$resumenJugador[];
-
-
-}
-
+function menu(){
+    echo "Menu \n 1) Jugar al wordix con una palabra elegida \n 2) Jugar al wordix con una palabra aleatoria \n 3) Mostrar una partida \n 4) Mostrar la primer partida ganadora \n 5) Mostrar resumen de jugador \n 6) Mostrar listados de partidas ordenados por jugador y palabra \n 7) Agregar una palabra de 5 letras al wordix \n 8) Salir \n" ;
+    $min=1;
+    $max=8;
+    $opcion=solicitarNumeroEntre($min, $max);
+    }
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
@@ -70,9 +70,6 @@ function cargarPartidas(){
 
 
 //Proceso:
-echo "Menu \n 1) Jugar al wordix con una palabra elegida \n 2) Jugar al wordix con una palabra aleatoria
-    \n 3) Mostrar una partida \n 4) Mostrar la primer partida ganadora \n 5) Mostrar resumen de jugador \n 
-    6) Mostrar listados de partidas ordenados por jugador y palabra \n 7) Agregar una palabra de 5 letras al wordix \n 8) Salir \n" ;
 
 $partida = jugarWordix("MELON", strtolower("MaJo"));
 //print_r($partida);

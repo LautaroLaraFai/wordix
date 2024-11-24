@@ -339,14 +339,17 @@ function esIntentoGanado($estructuraPalabraIntento)
 }
 
 /**
- * ****COMPLETAR***** documentación de la intefaz
+ * ****COMPLETADO***** documentación de la intefaz
  * Este modulo calcula el puntaje que el usuario obtuvo
- * @param
- * @return
+ * @param int $nroIntento
+ * @param string $palabra
+ * @return int
  */
-function obtenerPuntajeWordix($nroIntento,$palabra)  /* ****COMPLETAR***** parámetros formales necesarios */
+function obtenerPuntajeWordix($nroIntento,$palabra)  /* ****COMPLETADO***** parámetros formales necesarios */
 {
-    /* ****COMPLETAR***** cuerpo de la función*/
+    //int $puntaje; $i; $valorLetra 
+    //string $letra
+    /* ****COMPLETADO***** cuerpo de la función*/
     $puntaje=0;
     switch($nroIntento){
         case 1: 
@@ -371,14 +374,19 @@ function obtenerPuntajeWordix($nroIntento,$palabra)  /* ****COMPLETAR***** pará
             $puntaje=0;
             break;
     }
-
+    $palabra=strtolower($palabra);
     for ($i=0;$i<strlen($palabra);$i++){
-        $puntoLetra=valorLetra($palabra[$i]);
-        $puntaje+=$puntoLetra;    
+        $letra=$palabra[$i];
+        if($letra="a"||$letra="e"||$letra="i"||$letra="o"||$letra="u"){
+            $valorLetra=1;
+        }elseif($letra>="b"&&$letra<="m"){
+            $valorLetra=2;
+        }elseif($letra>"m"&&$letra<="z"){
+            $valorLetra=3;
+        }
+        $puntaje+=$valorLetra;
     }
-
-
-    return 0;
+    return $puntaje;
 }
 
 /** 
