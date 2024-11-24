@@ -91,7 +91,7 @@ function mostrarPartida($coleccionPartidas){
         echo "jugador: " . $coleccionPartidas[$nroPartida-1]["jugador"] . "\n";
         echo "puntaje: " . $coleccionPartidas[$nroPartida-1]["puntaje"] . "\n";
         echo "intento: " . ($coleccionPartidas[$nroPartida-1]["intentos"]>0) ? "adivino la palabra en " . $coleccionPartidas[$nroPartida-1]["intentos"] . " intentos \n" : "no adivino la palabra";
-        echo "******************************************** "
+        echo "******************************************** ";
     }else{
         echo "numero invalido, ingrese un nuevo numero";
         $nroPartida=trim(fgets(STDIN));
