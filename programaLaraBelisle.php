@@ -54,11 +54,15 @@ function cargarPartidas(){
         array("palabraWordix"=>"YUYOS", "jugador" => "sebastian", "intentos" => 3,"puntaje"=>9),
     ];}
 
+function resumen(){
+    
+}
+
     // En este modulo se puede usar solo un array asociativo o un arreglo asociativo de arreglos asociativos?
     /**
      * 
      */
-function resumen($coleccionPartidas,$jugadorResumen){
+function MostrarResumen($coleccionPartidas,$jugadorResumen){
     $cantPartidas=0;
     $puntajeTotal=0;
     $cantVictorias=0;
@@ -81,8 +85,10 @@ function resumen($coleccionPartidas,$jugadorResumen){
         echo "Victorias: " . $cantVictorias . "\n";
         echo "Porcentaje Victorias" . (int)($cantPartidas/$cantVictorias)*100 . "\n";
         echo "Adivinadas: ";
-        echo "intento 1:" . 
+        echo "intento 1:" . ;
         
+        $resumenJugador["jugador"][$jugadorResumen];
+
     }
 }
 /** Este modulo le pide al usuario un nombre y se asegura que la primera letra sea string
