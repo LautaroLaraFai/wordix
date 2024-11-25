@@ -49,15 +49,43 @@ function cargarPartidas(){
         array("palabraWordix"=>"TRIGO", "jugador" => "ninja", "intentos" => 2,"puntaje"=>12),
         array("palabraWordix"=>"HUEVO", "jugador" => "majo", "intentos" => 1,"puntaje"=>7),
         array("palabraWordix"=>"TRAPO", "jugador" => "lautaro", "intentos" => 5,"puntaje"=>18),
-        array("palabraWordix"=>"MELON", "jugador" => "pink2000", "intentos" => 6,"puntaje"=>6),
+        array("palabraWordix"=>"MELON", "jugador" => "pink2000", "intentos" => 3,"puntaje"=>8),
         array("palabraWordix"=>"FUEGO", "jugador" => "majo", "intentos" => 2,"puntaje"=>7),
         array("palabraWordix"=>"YUYOS", "jugador" => "sebastian", "intentos" => 3,"puntaje"=>9),
     ];}
-    // En este modulo se puede usar solo un array asociativo o un arreglo asociativo de arreglos asociativos?
-    function resumen(){
 
+    // En este modulo se puede usar solo un array asociativo o un arreglo asociativo de arreglos asociativos?
+    /**
+     * 
+     */
+function resumen($coleccionPartidas,$jugadorResumen){
+    $cantPartidas=0;
+    $puntajeTotal=0;
+    $cantVictorias=0;
+    $porcentajeVictorias=0;
+    
+    for($i=0;$i<count($coleccionPartidas);$i++){
+        if($jugadorResumen==$coleccionPartidas[$i]["jugador"]);
+            $cantPartidas++;
+            $puntajeTotal+=$coleccionPartidas[$i]["puntaje"];
+            if($coleccionPartidas[$i]["puntaje"]>0){
+                $cantVictorias++;
+            }
+    }
+    
+    if($cantPartidas>0){
+        echo "************************************************** \n";
+        echo "Jugador: " . $jugadorResumen . "\n";
+        echo "Partidas: " . $cantPartidas . "\n";
+        echo "Puntaje Total: " . $puntajeTotal . "\n";
+        echo "Victorias: " . $cantVictorias . "\n";
+        echo "Porcentaje Victorias" . (int)($cantPartidas/$cantVictorias)*100 . "\n";
+        echo "Adivinadas: ";
+        echo "intento 1:" . 
+        
+    }
 }
-/** Este modulo le pide al usuario un nombre y se asegura que la primera letra sea s@tring
+/** Este modulo le pide al usuario un nombre y se asegura que la primera letra sea string
  * @return $palabra
  */
 function solicitarJugador(){
@@ -65,17 +93,13 @@ function solicitarJugador(){
     //preguntar si se tiene que volver a preguntar el nombre si la primera letra no es una letra
     echo "ingrese nombre de usuario: ";
     $nombre=trim(fgets(STDIN));
-    do{
-        if(ctype_alpha($nombre[0])){
-            $nombre=strtolower($nombre);
-        }else{
-            echo "el primer digito tiene que ser una letra ";
-            $nombre=trim(fgets(STDIN));
-        }
-    }while(!(ctype_alpha($nombre[0])));
+    while(!(ctype_alpha($nombre[0]))){
+        echo "el primer digito tiene que ser una letra ";
+        $nombre=trim(fgets(STDIN));}
 
-
+    $nombre=strtolower($nombre);
     return $nombre;
+
 }
 /** Este modulo es un menu y se encarga de que el usuario ingrese una opcion correcta
  * 
