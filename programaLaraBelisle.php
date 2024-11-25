@@ -53,6 +53,10 @@ function cargarPartidas(){
         array("palabraWordix"=>"FUEGO", "jugador" => "majo", "intentos" => 2,"puntaje"=>7),
         array("palabraWordix"=>"YUYOS", "jugador" => "sebastian", "intentos" => 3,"puntaje"=>9),
     ];}
+    // En este modulo se puede usar solo un array asociativo o un arreglo asociativo de arreglos asociativos?
+    function resumen(){
+
+}
 /** Este modulo le pide al usuario un nombre y se asegura que la primera letra sea s@tring
  * @return $palabra
  */
@@ -129,7 +133,7 @@ function agregarPalabra($coleccionPalabras,$palabra){
 $coleccionPalabras=cargarColeccionPalabras();
 $coleccionPartidas=cargarPartidas();
 seleccionarOpcion();
-
+//preguntar como mostrar el uasort en el modulo 11
 $partida = jugarWordix("MELON", strtolower("MaJo"));
 //print_r($partida);
 //imprimirResultado($partida);
