@@ -65,8 +65,15 @@ function solicitarJugador(){
     //preguntar si se tiene que volver a preguntar el nombre si la primera letra no es una letra
     echo "ingrese nombre de usuario: ";
     $nombre=trim(fgets(STDIN));
-    $nombre=strtolower($nombre);
-    ctype_alpha($nombre[0]);
+    do{
+        if(ctype_alpha($nombre[0])){
+            $nombre=strtolower($nombre);
+        }else{
+            echo "el primer digito tiene que ser una letra ";
+            $nombre=trim(fgets(STDIN));
+        }
+    }while(!(ctype_alpha($nombre[0])));
+
 
     return $nombre;
 }
@@ -88,19 +95,20 @@ function mostrarPartida($coleccionPartidas){
      //int $nroPartida
     echo "ingrese un numero de partida a ver: ";
     $nroPartida=trim(fgets(STDIN));
-    //dentro de una repetitiva
-    if(is_numeric($nroPartida)){
-        echo "******************************************** \n";
-        echo "partida WORDIX " . $nroPartida . ": palabra " .  $coleccionPartidas[$nroPartida-1]["palabraWordix"] . "\n";
-        echo "jugador: " . $coleccionPartidas[$nroPartida-1]["jugador"] . "\n";
-        echo "puntaje: " . $coleccionPartidas[$nroPartida-1]["puntaje"] . "\n";
-        echo "intento: " . ($coleccionPartidas[$nroPartida-1]["intentos"]>0) ? "adivino la palabra en " . $coleccionPartidas[$nroPartida-1]["intentos"] . " intentos \n" : "no adivino la palabra";
-        echo "******************************************** ";
-    }else{
-        echo "numero invalido, ingrese un nuevo numero";
+    //esta bien? while (!(is_numeric($nroPartida)))
+
+    while(!(is_numeric($nroPartida)||$nroPartida>0&&$nroPartida==(int)($nroPartida))){
+        echo "el valor ingresado no es un numero o es 0, ingrese uno nuevo: ";
         $nroPartida=trim(fgets(STDIN));
     }
+    echo "******************************************** \n";
+    echo "partida WORDIX " . $nroPartida . ": palabra " .  $coleccionPartidas[$nroPartida-1]["palabraWordix"] . "\n";
+    echo "jugador: " . $coleccionPartidas[$nroPartida-1]["jugador"] . "\n";
+    echo "puntaje: " . $coleccionPartidas[$nroPartida-1]["puntaje"] . "\n";
+    echo "intento: " . ($coleccionPartidas[$nroPartida-1]["intentos"]>0) ? "adivino la palabra en " . $coleccionPartidas[$nroPartida-1]["intentos"] . " intentos \n" : "no adivino la palabra";
+    echo "******************************************** ";
 }
+
 
 /** Este modulo agrega una palabra que el usuario ingresa al array de palabras
  * @param array[] $coleccionPalabras
