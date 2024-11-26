@@ -42,11 +42,11 @@ function cargarColeccionPalabras(){
 function cargarPartidas(){
     //array[] $coleccionPartidas
     $coleccionPartidas=[
-        array("palabraWordix"=>"QUESO", "jugador" => "majo", "intentos" => 0,"puntaje"=>0),
-        array("palabraWordix"=>"CASAS", "jugador" => "rudolf", "intentos" => 3,"puntaje"=>14),
-        array("palabraWordix"=>"QUESO", "jugador" => "pink2000", "intentos" => 6,"puntaje"=>10),
-        array("palabraWordix"=>"PERRO", "jugador" => "ricardo", "intentos" => 4,"puntaje"=>4),
-        array("palabraWordix"=>"TRIGO", "jugador" => "ninja", "intentos" => 2,"puntaje"=>12),
+        array("palabraWordix"=>"QUESO", "jugador" => "majo", "intentos" => 0,"puntaje"=>0), 
+        array("palabraWordix"=>"CASAS", "jugador" => "rudolf", "intentos" => 3,"puntaje"=>14), 
+        array("palabraWordix"=>"QUESO", "jugador" => "pink2000", "intentos" => 6,"puntaje"=>10), 
+        array("palabraWordix"=>"PERRO", "jugador" => "ricardo", "intentos" => 4,"puntaje"=>4), 
+        array("palabraWordix"=>"TRIGO", "jugador" => "ninja", "intentos" => 2,"puntaje"=>12), 
         array("palabraWordix"=>"HUEVO", "jugador" => "majo", "intentos" => 1,"puntaje"=>7),
         array("palabraWordix"=>"TRAPO", "jugador" => "lautaro", "intentos" => 5,"puntaje"=>18),
         array("palabraWordix"=>"MELON", "jugador" => "pink2000", "intentos" => 3,"puntaje"=>8),
@@ -102,7 +102,7 @@ function solicitarJugador(){
     while(!(ctype_alpha($nombre[0]))){
         echo "el primer digito tiene que ser una letra ";
         $nombre=trim(fgets(STDIN));}
-
+    
     $nombre=strtolower($nombre);
     return $nombre;
 
@@ -125,8 +125,6 @@ function mostrarPartida($coleccionPartidas){
      //int $nroPartida
     echo "ingrese un numero de partida a ver: ";
     $nroPartida=trim(fgets(STDIN));
-    //esta bien? while (!(is_numeric($nroPartida)))
-
     while(!(is_numeric($nroPartida)||$nroPartida>0&&$nroPartida==(int)($nroPartida))){
         echo "el valor ingresado no es un numero o es 0, ingrese uno nuevo: ";
         $nroPartida=trim(fgets(STDIN));
@@ -137,6 +135,7 @@ function mostrarPartida($coleccionPartidas){
     echo "puntaje: " . $coleccionPartidas[$nroPartida-1]["puntaje"] . "\n";
     echo "intento: " . ($coleccionPartidas[$nroPartida-1]["intentos"]>0) ? "adivino la palabra en " . $coleccionPartidas[$nroPartida-1]["intentos"] . " intentos \n" : "no adivino la palabra";
     echo "******************************************** ";
+    
 }
 
 
