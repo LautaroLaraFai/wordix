@@ -220,18 +220,19 @@ do {
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
             $cant=count($coleccionPalabras);
             $nombreUsuario=solicitarJugador();
-            echo "ingrese un numero de palabra del 1 al " . $cant;
+            echo "ingrese un numero de palabra del 1 al " . $cant . ": ";
             $numPalabra=trim(fgets(STDIN));
             $bandera=false;
             for($i=0;$i<$cant&&!$bandera;$i++){
-                if($numPalabra==$numPalabrasUsadas[$i]||$numPalabra<=0){
+                if($numPalabra==$numPalabrasUsadas[$i]&&$numPalabra<=0&&in_array($numPalabra,$numPalabrasUsadas)){
                     echo "numero de palabra invalido o ya fue utilizado, elija otro";
                     $numPalabra=trim(fgets(STDIN));
                 }else{
                     $bandera=true;
                     $palabraOpcion1=$coleccionPalabras[$numPalabra];
+                    $numPalabrasUsadas[$i]=$numPalabra;
                 }
-                $numPalabrasUsadas[$i]=$numPalabra;
+                
             }
             $partida=jugarWordix($palabraOpcion1,$nombreUsuario);
             $countPartidas=count($coleccionPartidas);
@@ -243,6 +244,7 @@ do {
             $valorMaximo=(count($coleccionPalabras)-1);
             $indice=rand(0,$valorMaximo);
             $palabraWordix=$coleccionPalabras[$indice];
+
             $partida=jugarWordix($palabraWordix,$nombreUsuario);
             $countPartidas=count($coleccionPartidas);
             $coleccionPartidas[$countPartidas]=$partida;
@@ -250,13 +252,15 @@ do {
         case 3: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
             $partidaMostrada=mostrarPartida($coleccionPartidas);
+
             $palabraWordix=$partidaMostrada;
             $partida=jugarWordix($palabraWordix,$nombreUsuario);
             $countPartidas=count($coleccionPartidas);
             $coleccionPartidas[$countPartidas]=$partida;
             break;
         
-            //...
+        case 4:
+
     }
 } while ($opcion != 8);
 
