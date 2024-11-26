@@ -52,7 +52,8 @@ function cargarPartidas(){
         array("palabraWordix"=>"MELON", "jugador" => "pink2000", "intentos" => 3,"puntaje"=>8),
         array("palabraWordix"=>"FUEGO", "jugador" => "majo", "intentos" => 2,"puntaje"=>7),
         array("palabraWordix"=>"YUYOS", "jugador" => "sebastian", "intentos" => 3,"puntaje"=>9),
-    ];}
+    ];
+    return $coleccionPartidas;}
 
 
     
@@ -126,7 +127,6 @@ function cargarPartidas(){
 
  function solicitarJugador(){
     //string $nombre
-    //preguntar si se tiene que volver a preguntar el nombre si la primera letra no es una letra
     echo "ingrese nombre de usuario: ";
     $nombre=trim(fgets(STDIN));
     while(!(ctype_alpha($nombre[0]))){
@@ -205,25 +205,55 @@ seleccionarOpcion();
 //print_r($partida);
 //imprimirResultado($partida);
 
+$numPalabrasUsadas=[]; //caso 1
 
+$palabrasUsadas=[]; //caso 2
 
 
 do {
+    echo seleccionarOpcion();
     $opcion = trim(fgets(STDIN));
     
     
     switch ($opcion) {
         case 1: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
-
+            $cant=count($coleccionPalabras);
+            $nombreUsuario=solicitarJugador();
+            echo "ingrese un numero de palabra del 1 al " . $cant;
+            $numPalabra=trim(fgets(STDIN));
+            $bandera=false;
+            for($i=0;$i<$cant&&!$bandera;$i++){
+                if($numPalabra==$numPalabrasUsadas[$i]||$numPalabra<=0){
+                    echo "numero de palabra invalido o ya fue utilizado, elija otro";
+                    $numPalabra=trim(fgets(STDIN));
+                }else{
+                    $bandera=true;
+                    $palabraOpcion1=$coleccionPalabras[$numPalabra];
+                }
+                $numPalabrasUsadas[$i]=$numPalabra;
+            }
+            $partida=jugarWordix($palabraOpcion1,$nombreUsuario);
+            $countPartidas=count($coleccionPartidas);
+            $coleccionPartidas[$countPartidas]=$partida; //carga la partida en el arreglo de partidas
             break;
         case 2: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
-
+            $nombreUsuario=solicitarJugador();
+            $valorMaximo=(count($coleccionPalabras)-1);
+            $indice=rand(0,$valorMaximo);
+            $palabraWordix=$coleccionPalabras[$indice];
+            $partida=jugarWordix($palabraWordix,$nombreUsuario);
+            $countPartidas=count($coleccionPartidas);
+            $coleccionPartidas[$countPartidas]=$partida;
             break;
         case 3: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
-
+            $partidaMostrada=mostrarPartida($coleccionPartidas);
+            $palabraWordix=$partidaMostrada;
+            $partida=jugarWordix($palabraWordix,$nombreUsuario);
+            $countPartidas=count($coleccionPartidas);
+            $coleccionPartidas[$countPartidas]=$partida;
             break;
         
             //...
