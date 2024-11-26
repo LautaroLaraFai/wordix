@@ -138,7 +138,6 @@ function cargarPartidas(){
 
 }
 /** Este modulo es un menu y se encarga de que el usuario ingrese una opcion correcta
- * 
  */
 function seleccionarOpcion(){
     // int $min;$max;$opcion
