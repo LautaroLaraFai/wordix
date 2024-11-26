@@ -54,47 +54,77 @@ function cargarPartidas(){
         array("palabraWordix"=>"YUYOS", "jugador" => "sebastian", "intentos" => 3,"puntaje"=>9),
     ];}
 
-function resumen(){
-    
-}
 
-    // En este modulo se puede usar solo un array asociativo o un arreglo asociativo de arreglos asociativos?
-    /**
-     * 
-     */
-function MostrarResumen($coleccionPartidas,$jugadorResumen){
+    
+/** Este modulo es un resumen de un solo jugador
+ * @param array[] $coleccionPartidas
+ * @param string $jugadorResumen
+ * @return array[]
+ */
+
+ function resumen($coleccionPartidas,$jugadorResumen){
+    //array $arrayResumenJugador
+    //int $cantPartidas, $puntajeTotal, $cantVictorias, $intento1, $intento2, $intento3, $intento4, $intento5, $intento6, $i, $cant
+    $arrayResumenJugador = [];
     $cantPartidas=0;
     $puntajeTotal=0;
     $cantVictorias=0;
-    $porcentajeVictorias=0;
-    
-    for($i=0;$i<count($coleccionPartidas);$i++){
-        if($jugadorResumen==$coleccionPartidas[$i]["jugador"]);
+    $intento1=0;
+    $intento2=0;
+    $intento3=0;
+    $intento4=0;
+    $intento5=0;
+    $intento6=0;
+    $cant=count($coleccionPartidas);
+
+    for($i=0;$i<$cant;$i++){
+        if($jugadorResumen==$coleccionPartidas[$i]["jugador"]){;
             $cantPartidas++;
             $puntajeTotal+=$coleccionPartidas[$i]["puntaje"];
             if($coleccionPartidas[$i]["puntaje"]>0){
                 $cantVictorias++;
             }
+            if($coleccionPartidas[$i]["intentos"]==1){
+                $intento1++;
+            }
+            elseif($coleccionPartidas[$i]["intentos"]==2){
+                $intento2++;
+            }
+            elseif($coleccionPartidas[$i]["intentos"]==3){
+                $intento3++;
+            }
+            elseif($coleccionPartidas[$i]["intentos"]==4){
+                $intento4++;
+            }
+            elseif($coleccionPartidas[$i]["intentos"]==5){
+                $intento5++;
+            }
+            elseif($coleccionPartidas[$i]["intentos"]==6){
+                $intento6++;
+            }
+        }
     }
-    
-    if($cantPartidas>0){
-        echo "************************************************** \n";
-        echo "Jugador: " . $jugadorResumen . "\n";
-        echo "Partidas: " . $cantPartidas . "\n";
-        echo "Puntaje Total: " . $puntajeTotal . "\n";
-        echo "Victorias: " . $cantVictorias . "\n";
-        echo "Porcentaje Victorias" . (int)($cantPartidas/$cantVictorias)*100 . "\n";
-        echo "Adivinadas: ";
-        echo "intento 1:" . ;
-        
-        $resumenJugador["jugador"][$jugadorResumen];
 
-    }
+    $arrayResumenJugador=[
+        "jugador" => $jugadorResumen,
+        "partidas" => $cantPartidas,
+        "puntaje" => $puntajeTotal,
+        "victorias" => $cantVictorias,
+        "intento 1" => $intento1,
+        "intento 2" => $intento2,
+        "intento 3" => $intento3,
+        "intento 4" => $intento4,
+        "intento 5" => $intento5,
+        "intento 6" => $intento6,
+    ];
+    return $arrayResumenJugador;
 }
+
 /** Este modulo le pide al usuario un nombre y se asegura que la primera letra sea string
  * @return $palabra
  */
-function solicitarJugador(){
+
+ function solicitarJugador(){
     //string $nombre
     //preguntar si se tiene que volver a preguntar el nombre si la primera letra no es una letra
     echo "ingrese nombre de usuario: ";
