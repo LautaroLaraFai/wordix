@@ -199,17 +199,18 @@ function agregarPalabra($coleccionPalabras,$palabra){
 $coleccionPalabras=cargarColeccionPalabras();
 $coleccionPartidas=cargarPartidas();
 seleccionarOpcion();
-//preguntar como mostrar el uasort en el modulo 11
-$partida = jugarWordix("MELON", strtolower("MaJo"));
+
+
+//$partida = jugarWordix("MELON", strtolower("MaJo"));
 //print_r($partida);
 //imprimirResultado($partida);
 
 
 
-/*
-do {
-    $opcion = ...;
 
+do {
+    $opcion = trim(fgets(STDIN));
+    
     
     switch ($opcion) {
         case 1: 
@@ -227,5 +228,5 @@ do {
         
             //...
     }
-} while ($opcion != X);
-*/
+} while ($opcion != 8);
+
