@@ -144,6 +144,8 @@ function seleccionarOpcion(){
     $min=1;
     $max=8;
     $opcion=solicitarNumeroEntre($min, $max);
+
+    return $opcion;
     }
 /** Este modulo muestra la partida que el usuario desea ver
  * @param array[] $coleccionPartidas
@@ -161,7 +163,7 @@ function mostrarPartida($coleccionPartidas){
     echo "partida WORDIX " . $nroPartida . ": palabra " .  $coleccionPartidas[$nroPartida-1]["palabraWordix"] . "\n";
     echo "jugador: " . $coleccionPartidas[$nroPartida-1]["jugador"] . "\n";
     echo "puntaje: " . $coleccionPartidas[$nroPartida-1]["puntaje"] . "\n";
-    echo "intento: " . (($coleccionPartidas[$nroPartida-1]["intentos"]>0) ? "no adivino la palabra \n" : "adivino la palabra en " . $coleccionPartidas[$nroPartida-1]["intentos"] . " intentos \n" );
+    echo "intento: " . (($coleccionPartidas[$nroPartida-1]["intentos"]==0) ? "no adivino la palabra \n" : "adivino la palabra en " . $coleccionPartidas[$nroPartida-1]["intentos"] . " intentos \n" );
     echo "******************************************** ";
     
 }
@@ -207,8 +209,7 @@ $palabrasUsadas=[]; //caso 2
 
 
 do {
-    echo seleccionarOpcion();
-   $opcion=trim(fgets(STDIN));
+   $opcion = seleccionarOpcion();
     
     
     switch ($opcion) {
@@ -251,6 +252,10 @@ do {
 
             break;
         case 4:
+            // muestra la primera partida ganada de un jugador seleccionado
+
+            break;
+        case 5:
 
     }
 } while ($opcion != 8);
