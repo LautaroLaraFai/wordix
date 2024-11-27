@@ -244,23 +244,25 @@ function ordenarPartidas($coleccionPartidas){
 
 //Declaración de variables:
 
+// int $cant; $numPalabra; $i; $countPartidas; $valorMaximo; $indice; $victorias; $partidas
+//string $nombreUsuario; $numPalabra; $palabraOpcion1; $palabraWordix; $jugadorResumen
+//bool $bandera
+//array[] $coleccionPalabras; $numPalabrasUsadas; $coleccionPartidas; $partidaMostrada; $arrayResumenJugador
 
 //Inicialización de variables:
-
-
-//Proceso:
-
-//$partida = jugarWordix("MELON", strtolower("MaJo"));
-//print_r($partida);
-//imprimirResultado($partida);
 
 $coleccionPalabras=cargarColeccionPalabras();
 $coleccionPartidas=cargarPartidas();
 
 $numPalabrasUsadas[0]=-1; //caso 1
 
-$palabrasUsadas=[]; //caso 2
+$palabrasUsadas[0]="a"; //caso 2
 
+//Proceso:
+
+//$partida = jugarWordix("MELON", strtolower("MaJo"));
+//print_r($partida);
+//imprimirResultado($partida);
 
 do {
    $opcion = seleccionarOpcion();
@@ -295,7 +297,20 @@ do {
             $valorMaximo=(count($coleccionPalabras)-1);
             $indice=rand(0,$valorMaximo);
             $palabraWordix=$coleccionPalabras[$indice];
-
+            $bandera=false;
+            $limite=count($palabrasUsadas);
+            //arreglar repetitiva, la palabra tiene que guardarse en palabras usadas, si esta repetida tiene que 
+            //elegirse otra con la funcion rand, que da un numero aleatorio
+            while(!$bandera){
+                for($i=0;$i<$limite;$i++){    
+                    if($palabraWordix==$coleccionPalabras[$i]){
+                        $indice=rand(0,$valorMaximo);
+                        $palabraWordix=$coleccionPalabras[$indice];
+                        $bandera=true;
+                    }
+                }
+            }
+            $palabrasUsadas=$coleccionPalabras[$indice];
             $partida=jugarWordix($palabraWordix,$nombreUsuario);
             $countPartidas=count($coleccionPartidas);
             $coleccionPartidas[$countPartidas]=$partida;
