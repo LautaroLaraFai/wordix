@@ -193,7 +193,7 @@ function indicePartidaGanada($coleccionPartidas,$nombreUsuario){
     $cant=count($coleccionPartidas);
     $encontrado=false;
     while($i<$cant&&!$encontrado){
-        if($coleccionPartidas[$i]["puntaje"]>0&&$coleccionPartidas[$i]["jugador"]==$nombreUsuario){
+        if($coleccionPartidas[$i]["puntaje"]>0 && $coleccionPartidas[$i]["jugador"]==$nombreUsuario){
             $partidaGanada=$i;
             $encontrado=true;
         }else{
@@ -313,12 +313,8 @@ do {
             $indice=indicePartidaGanada($coleccionPartidas,$nombreUsuario);
             $limite=count($coleccionPartidas);
             
-            for($i=0;$i<$limite;$i++){
-                if($coleccionPartidas[$i]["jugador"]!=$nombreUsuario){
-                    $indice=0;
-                }
-            }
-            if($indice>0){
+            
+            if($indice>=0){
                 echo "************************************************ \n";
                 echo "partida WORDIX " . $indice+1 . ": palabra " . $coleccionPartidas[$indice]["palabraWordix"] . "\n";
                 echo "jugador: " . $coleccionPartidas[$indice]["jugador"] . "\n";
@@ -367,7 +363,7 @@ do {
         case 7:
             // Añade una palabra al Wordix
             $palabra=leerPalabra5Letras();
-            agregarPalabra($coleccionPalabras,$palabra);
+            $coleccionPalabras=agregarPalabra($coleccionPalabras,$palabra);
             echo "Su palabra se ha añadido a WORDIX";            
             break;}
 } while ($opcion != 8);
