@@ -155,8 +155,9 @@ function mostrarPartida($coleccionPartidas){
      //int $nroPartida
     echo "ingrese un numero de partida a ver: ";
     $nroPartida=trim(fgets(STDIN));
-    while(!(is_numeric($nroPartida)||$nroPartida>0&&$nroPartida==(int)($nroPartida))){
-        echo "el valor ingresado no es un numero o es 0, ingrese uno nuevo: ";
+    $limite=count($coleccionPartidas);
+    while(!(is_numeric($nroPartida)||$nroPartida>0&&$nroPartida==(int)($nroPartida)||$nroPartida>$limite)){
+        echo "el valor ingresado es invalido, ingrese un numero: ";
         $nroPartida=trim(fgets(STDIN));
     }
     echo "******************************************** \n";
@@ -192,7 +193,6 @@ function indicePartidaGanada($coleccionPartidas,$nombreUsuario){
     //int $i; $cant; $partidaGanada
     //bool $encontrado
     $i=0;
-    $indice=0;
     $cant=count($coleccionPartidas);
     $encontrado=false;
     while($i<$cant&&!$encontrado){
@@ -270,14 +270,14 @@ do {
     
     switch ($opcion) {
         case 1: 
-            //Juega una partida de WORDIX con la palabra que el usuario elija
+            //Juega una partida de WORDIX con el numero de palabra que el usuario elija
             $cant=count($coleccionPalabras)-1;
             $nombreUsuario=solicitarJugador();
             echo "ingrese un numero de palabra del 1 al " . $cant . ": ";
             $numPalabra=trim(fgets(STDIN));
             $bandera=false;
             for($i=0;$i<$cant&&!$bandera;$i++){
-                if($numPalabra==$numPalabrasUsadas[$i]&&$numPalabra<=0){
+                if($numPalabra==$numPalabrasUsadas[$i]||$numPalabra<=0||$numPalabra>$cant){
                     echo "numero de palabra invalido o ya fue utilizado, elija otro";
                     $numPalabra=trim(fgets(STDIN));
                 }else{
@@ -299,9 +299,11 @@ do {
             $palabraWordix=$coleccionPalabras[$indice];
             $bandera=false;
             $limite=count($palabrasUsadas);
-            //arreglar repetitiva, la palabra tiene que guardarse en palabras usadas, si esta repetida tiene que 
-            //elegirse otra con la funcion rand, que da un numero aleatorio
-            while(!$bandera){
+            //arreglar repetitiva, la palabra tiene que guardarse en palabras usadas, si esta repetida  
+            //tiene que elegirse otra con la funcion rand, que da un numero aleatorio
+
+
+            /*while(!$bandera){
                 for($i=0;$i<$limite;$i++){    
                     if($palabraWordix==$coleccionPalabras[$i]){
                         $indice=rand(0,$valorMaximo);
@@ -309,7 +311,7 @@ do {
                         $bandera=true;
                     }
                 }
-            }
+            }*/
             $palabrasUsadas=$coleccionPalabras[$indice];
             $partida=jugarWordix($palabraWordix,$nombreUsuario);
             $countPartidas=count($coleccionPartidas);
@@ -319,6 +321,7 @@ do {
             //Muestra una partida que el usuario elija
 
             //hay que añadir otra condicion por si la partida se pasa de los limites del array
+            //ya añadida
             $partidaMostrada=mostrarPartida($coleccionPartidas);
 
             break;
@@ -343,22 +346,35 @@ do {
             //se puede añadir un if que diga que si el usuario no esta en el array es porque el usuario no jugo al WORDIX
             echo "ingrese el jugador para mostrar su resumen: ";
             $jugadorResumen=trim(fgets(STDIN));
+            $limite=count($coleccionPartidas);
+            $bandera=false;
             $arrayResumenJugador=resumen($coleccionPartidas,$jugadorResumen);
-            $victorias=$arrayResumenJugador["victorias"];
-            $partidas=$arrayResumenJugador["partidas"];
-            echo "********************************************";
-            echo "Jugador: " . $arrayResumenJugador["jugador"] . "\n";
-            echo "Partidas: " . $arrayResumenJugador["partidas"] . "\n";
-            echo "puntaje total: " . $arrayResumenJugador["puntaje"] . "\n";
-            echo "Victorias: " . $arrayResumenJugador["victorias"] . "\n";
-            echo "Porcentaje Victorias: " . ($victorias/$partidas)*100  . "\n";
-            echo "adivinadas: \n intento 1: " . $arrayResumenJugador["intento1"] . "\n";
-            echo "intento 2: " . $arrayResumenJugador["intento2"] . "\n";
-            echo "intento 3: " . $arrayResumenJugador["intento3"] . "\n";
-            echo "intento 4: " . $arrayResumenJugador["intento4"] . "\n";
-            echo "intento 5: " . $arrayResumenJugador["intento5"] . "\n";
-            echo "intento 6: " . $arrayResumenJugador["intento6"] . "\n";
-            echo "********************************************";
+            if($arrayResumenJugador["partidas"]>0){
+
+                   
+                    $bandera=true;}
+                  
+                   
+            if($bandera){
+                $victorias=$arrayResumenJugador["victorias"];
+                $partidas=$arrayResumenJugador["partidas"];
+                echo "********************************************";
+                echo "Jugador: " . $arrayResumenJugador["jugador"] . "\n";
+                echo "Partidas: " . $arrayResumenJugador["partidas"] . "\n";
+                echo "puntaje total: " . $arrayResumenJugador["puntaje"] . "\n";
+                echo "Victorias: " . $arrayResumenJugador["victorias"] . "\n";
+                echo "Porcentaje Victorias: " . ($victorias/$partidas)*100  . "\n";
+                echo "adivinadas: \n intento 1: " . $arrayResumenJugador["intento1"] . "\n";
+                echo "intento 2: " . $arrayResumenJugador["intento2"] . "\n";
+                echo "intento 3: " . $arrayResumenJugador["intento3"] . "\n";
+                echo "intento 4: " . $arrayResumenJugador["intento4"] . "\n";
+                echo "intento 5: " . $arrayResumenJugador["intento5"] . "\n";
+                echo "intento 6: " . $arrayResumenJugador["intento6"] . "\n";
+                echo "********************************************";
+            }else{
+                echo "el usuario ingresado no ha jugado al wordix \n";
+            }
+
             break;
         case 6:
             ordenarPartidas($coleccionPartidas);
