@@ -296,26 +296,23 @@ do {
             $nombreUsuario=solicitarJugador();
             $valorMaximo=(count($coleccionPalabras)-1);
             $indice=rand(0,$valorMaximo);
-            $palabraWordix=$coleccionPalabras[$indice];
+            
             $bandera=false;
             $limite=count($palabrasUsadas);
             //arreglar repetitiva, la palabra tiene que guardarse en palabras usadas, si esta repetida  
             //tiene que elegirse otra con la funcion rand, que da un numero aleatorio
-
-
-            /*while(!$bandera){
-                for($i=0;$i<$limite;$i++){    
-                    if($palabraWordix==$coleccionPalabras[$i]){
-                        $indice=rand(0,$valorMaximo);
-                        $palabraWordix=$coleccionPalabras[$indice];
-                        $bandera=true;
-                    }
+            for($i=0;$i<$limite;$i++){
+                if($coleccionPalabras[$indice]==$palabrasUsadas){
+                    $indice=rand(0,$valorMaximo);
                 }
-            }*/
+            }
+            $palabraWordix=$coleccionPalabras[$indice];
             $palabrasUsadas=$coleccionPalabras[$indice];
             $partida=jugarWordix($palabraWordix,$nombreUsuario);
             $countPartidas=count($coleccionPartidas);
             $coleccionPartidas[$countPartidas]=$partida;
+            
+           
             break;
         case 3: 
             //Muestra una partida que el usuario elija
@@ -331,6 +328,7 @@ do {
             $nombreUsuario=trim(fgets(STDIN));
             $indice=indicePartidaGanada($coleccionPartidas,$nombreUsuario);
             //se puede añadir un if que diga que si el usuario no esta en el array es porque el usuario no jugo al WORDIX
+
             if($indice>0){
                 echo "************************************************ \n";
                 echo "partida WORDIX " . $indice+1 . ": palabra " . $coleccionPartidas[$indice]["palabraWordix"] . "\n";
@@ -350,11 +348,8 @@ do {
             $bandera=false;
             $arrayResumenJugador=resumen($coleccionPartidas,$jugadorResumen);
             if($arrayResumenJugador["partidas"]>0){
-
-                   
-                    $bandera=true;}
-                  
-                   
+                $bandera=true;
+            }
             if($bandera){
                 $victorias=$arrayResumenJugador["victorias"];
                 $partidas=$arrayResumenJugador["partidas"];
