@@ -375,7 +375,7 @@ function obtenerPuntajeWordix($nroIntento,$palabra)  /* ****COMPLETADO***** par√
             break;
     }
     $palabra=strtolower($palabra);
-    for ($i=0;$i<=strlen($palabra);$i++){
+    for ($i=0;$i<strlen($palabra);$i++){
         $letra=$palabra[$i];
         if($letra="a"||$letra="e"||$letra="i"||$letra="o"||$letra="u"){
             $valorLetra=1;

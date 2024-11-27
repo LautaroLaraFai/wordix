@@ -35,9 +35,8 @@ function cargarColeccionPalabras(){
     return $coleccionPalabras;
 }
 
-/* ****A MEDIO COMPLETAR***** */
+/* ****COMPLETADO***** */
 /** Este modulo guarda partidas 
- * TIENE RETORNO?
  */
 function cargarPartidas(){
     //array[] $coleccionPartidas
@@ -141,7 +140,7 @@ function cargarPartidas(){
  */
 function seleccionarOpcion(){
     // int $min;$max;$opcion
-    echo "Menu \n 1) Jugar al wordix con una palabra elegida \n 2) Jugar al wordix con una palabra aleatoria \n 3) Mostrar una partida \n 4) Mostrar la primer partida ganadora \n 5) Mostrar resumen de jugador \n 6) Mostrar listados de partidas ordenados por jugador y palabra \n 7) Agregar una palabra de 5 letras al wordix \n 8) Salir \n" ;
+    echo "\n Menu \n 1) Jugar al wordix con una palabra elegida \n 2) Jugar al wordix con una palabra aleatoria \n 3) Mostrar una partida \n 4) Mostrar la primer partida ganadora \n 5) Mostrar resumen de jugador \n 6) Mostrar listados de partidas ordenados por jugador y palabra \n 7) Agregar una palabra de 5 letras al wordix \n 8) Salir \n" ;
     $min=1;
     $max=8;
     $opcion=solicitarNumeroEntre($min, $max);
@@ -162,7 +161,7 @@ function mostrarPartida($coleccionPartidas){
     echo "partida WORDIX " . $nroPartida . ": palabra " .  $coleccionPartidas[$nroPartida-1]["palabraWordix"] . "\n";
     echo "jugador: " . $coleccionPartidas[$nroPartida-1]["jugador"] . "\n";
     echo "puntaje: " . $coleccionPartidas[$nroPartida-1]["puntaje"] . "\n";
-    echo "intento: " . ($coleccionPartidas[$nroPartida-1]["intentos"]>0) ? "adivino la palabra en " . $coleccionPartidas[$nroPartida-1]["intentos"] . " intentos \n" : "no adivino la palabra";
+    echo "intento: " . (($coleccionPartidas[$nroPartida-1]["intentos"]>0) ? "no adivino la palabra \n" : "adivino la palabra en " . $coleccionPartidas[$nroPartida-1]["intentos"] . " intentos \n" );
     echo "******************************************** ";
     
 }
@@ -181,9 +180,7 @@ function agregarPalabra($coleccionPalabras,$palabra){
 }
 
 
-    //preguntar si esto va en el algoritmo principal
-    leerPalabra5Letras();
-
+   
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -198,21 +195,20 @@ function agregarPalabra($coleccionPalabras,$palabra){
 
 $coleccionPalabras=cargarColeccionPalabras();
 $coleccionPartidas=cargarPartidas();
-seleccionarOpcion();
 
 
 //$partida = jugarWordix("MELON", strtolower("MaJo"));
 //print_r($partida);
 //imprimirResultado($partida);
 
-$numPalabrasUsadas=[]; //caso 1
+$numPalabrasUsadas[0]=-1; //caso 1
 
 $palabrasUsadas=[]; //caso 2
 
 
 do {
     echo seleccionarOpcion();
-    $opcion = trim(fgets(STDIN));
+   $opcion=trim(fgets(STDIN));
     
     
     switch ($opcion) {
@@ -224,7 +220,7 @@ do {
             $numPalabra=trim(fgets(STDIN));
             $bandera=false;
             for($i=0;$i<$cant&&!$bandera;$i++){
-                if($numPalabra==$numPalabrasUsadas[$i]&&$numPalabra<=0&&in_array($numPalabra,$numPalabrasUsadas)){
+                if($numPalabra==$numPalabrasUsadas[$i]&&$numPalabra<=0){
                     echo "numero de palabra invalido o ya fue utilizado, elija otro";
                     $numPalabra=trim(fgets(STDIN));
                 }else{
@@ -253,12 +249,7 @@ do {
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
             $partidaMostrada=mostrarPartida($coleccionPartidas);
 
-            $palabraWordix=$partidaMostrada;
-            $partida=jugarWordix($palabraWordix,$nombreUsuario);
-            $countPartidas=count($coleccionPartidas);
-            $coleccionPartidas[$countPartidas]=$partida;
             break;
-        
         case 4:
 
     }
