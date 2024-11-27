@@ -181,8 +181,59 @@ function agregarPalabra($coleccionPalabras,$palabra){
     return $coleccionPalabras;
 }
 
+/**
+ * Este modulo devuelve el indice de la primer partida ganada
+ * @param array[] $coleccionPartidas
+ * @param string $nombreUsuario
+ * @return int
+ */
+function indicePartidaGanada($coleccionPartidas,$nombreUsuario){
+    //int $i; $cant; $partidaGanada
+    //bool $encontrado
+    $i=0;
+    $cant=count($coleccionPartidas);
+    $encontrado=false;
+    while($i<$cant&&!$encontrado){
+        if($coleccionPartidas["puntaje"]>0&&$coleccionPartidas["jugador"]==$nombreUsuario){
+            $partidaGanada=$i;
+            $encontrado=true;
+        }elseif($coleccionPartidas["puntaje"]>0&&$coleccionPartidas["jugador"]==$nombreUsuario){
+            $partidaGanada=-1;
+        }
+    }
+    return $partidaGanada;
+    //el elseif creo que se podria cambiar por un else
+}  
 
-   
+/**
+ * Este modulo ordena las partidas de un array por su nombre si tienen mismo nombre los ordena por palabra
+ * @param array[] $coleccionPartidas 
+ * @return int
+ */
+function($coleccionPartidas){
+    //ont $valor,
+    $coleccionPartidasOrdenada=$coleccionPartidas;
+
+    uasort($coleccionPartidasOrdenada, function($a,$b){
+        if($a["jugador"]<$b["jugador"]){
+            $valor=-1;
+        }elseif($a["jugador"]>$b["jugador"]){
+            $valor=1;
+        }else{  //si los jugadores son iguales se los ordena por la palabra
+            if($a["palabra"]<$b["palabra"]){
+                $valor=-1;
+            }elseif($a["palabra"]>$b["palabra"]){
+                $valor=1;
+            }else{
+                $valor=0;
+            }
+        }
+        return $valor;
+    });
+
+    print_r($coleccionPartidasOrdenada);
+}
+
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -195,13 +246,12 @@ function agregarPalabra($coleccionPalabras,$palabra){
 
 //Proceso:
 
-$coleccionPalabras=cargarColeccionPalabras();
-$coleccionPartidas=cargarPartidas();
-
-
 //$partida = jugarWordix("MELON", strtolower("MaJo"));
 //print_r($partida);
 //imprimirResultado($partida);
+
+$coleccionPalabras=cargarColeccionPalabras();
+$coleccionPartidas=cargarPartidas();
 
 $numPalabrasUsadas[0]=-1; //caso 1
 
@@ -253,7 +303,16 @@ do {
             break;
         case 4:
             // muestra la primera partida ganada de un jugador seleccionado
+            echo "ingrese un nombre de usuario para ver su primera victoria: ";
+            $nombreUsuario=trim(fgets(STDIN));
+            $indice=indicePartidaGanada($coleccionPartidas,$nombreUsuario);
+            if($indice=>0){
+                echo "partida WORDIX " . $indice++ . ": palabra " . $coleccionPartidas[$indice]["palabra"] . "\n";
+                echo "jugador: " . $coleccionPartidas[$indice]["jugador"] . "\n";
+                echo "puntaje: " . $coleccionPartidas[$indice]["puntaje"];
+                
 
+            }
             break;
         case 5:
 
