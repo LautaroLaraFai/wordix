@@ -299,8 +299,6 @@ do {
             
             $bandera=false;
             $limite=count($palabrasUsadas);
-            //arreglar repetitiva, la palabra tiene que guardarse en palabras usadas, si esta repetida  
-            //tiene que elegirse otra con la funcion rand, que da un numero aleatorio
             for($i=0;$i<$limite;$i++){
                 if($coleccionPalabras[$indice]==$palabrasUsadas){
                     $indice=rand(0,$valorMaximo);
@@ -316,9 +314,6 @@ do {
             break;
         case 3: 
             //Muestra una partida que el usuario elija
-
-            //hay que añadir otra condicion por si la partida se pasa de los limites del array
-            //ya añadida
             $partidaMostrada=mostrarPartida($coleccionPartidas);
 
             break;
@@ -327,8 +322,14 @@ do {
             echo "ingrese un nombre de usuario para ver su primera victoria: ";
             $nombreUsuario=trim(fgets(STDIN));
             $indice=indicePartidaGanada($coleccionPartidas,$nombreUsuario);
+            $limite=count($coleccionPartidas);
             //se puede añadir un if que diga que si el usuario no esta en el array es porque el usuario no jugo al WORDIX
+            for($i=0;$i<$limite;$i++){
+                if($coleccionPartidas[$i]["jugador"]!=$nombreUsuario){
+                    $indice=0;
+                }
 
+            }
             if($indice>0){
                 echo "************************************************ \n";
                 echo "partida WORDIX " . $indice+1 . ": palabra " . $coleccionPartidas[$indice]["palabraWordix"] . "\n";
@@ -337,11 +338,10 @@ do {
                 echo "puntaje: " . $coleccionPartidas[$indice]["intentos"] . "\n";
                 echo "************************************************ \n";
             }else{
-                echo "el usuario ingresado no gano ninguna partida";
+                echo "el usuario ingresado no gano ninguna partida o no existe";
             }
             break;
         case 5:
-            //se puede añadir un if que diga que si el usuario no esta en el array es porque el usuario no jugo al WORDIX
             echo "ingrese el jugador para mostrar su resumen: ";
             $jugadorResumen=trim(fgets(STDIN));
             $limite=count($coleccionPartidas);
