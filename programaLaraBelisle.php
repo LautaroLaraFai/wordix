@@ -287,22 +287,7 @@ do {
             if($bandera){
                 $partida=jugarWordix($palabraOpcion1,$nombreUsuario);
                 $coleccionPartidas[$countPartidas]=$partida; //carga la partida en el arreglo de partidas
-            }
-
-
-            /*while($i<$cant&&!$bandera){
-
-                if($numPalabra==$numPalabrasUsadas[$i]||$numPalabra<=0||$numPalabra>$cant){
-                    echo "Numero de palabra invalido o ya fue utilizado, elija otro: ";
-                    $numPalabra=trim(fgets(STDIN));   
-                }else{
-                    $bandera=true;
-                    $palabraOpcion1=$coleccionPalabras[$numPalabra-1];
-                    $numPalabrasUsadas[$i]=$numPalabra;
-                }
-                $i++;
-            }*/
-           
+            } 
             break;
         case 2: 
             // Juega una partida de WORDIX con una palabra aleatoria
