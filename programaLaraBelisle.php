@@ -83,7 +83,7 @@ function cargarColeccionPalabras(){
             if($coleccionPartidas[$i]["puntaje"]>0){
                 $cantVictorias++;
             }
-            elseif($coleccionPartidas[$i]["intentos"]==1){
+            if($coleccionPartidas[$i]["intentos"]==1){
                 $intento1++;
             }
             elseif($coleccionPartidas[$i]["intentos"]==2){
@@ -154,7 +154,7 @@ function mostrarPartida($coleccionPartidas){
     echo "ingrese un numero de partida a ver: ";
     $nroPartida=trim(fgets(STDIN));
     $limite=count($coleccionPartidas);
-    while(!(is_numeric($nroPartida)||$nroPartida>0&&$nroPartida==(int)($nroPartida)||$nroPartida>$limite)){
+    while(!(is_numeric($nroPartida)||$nroPartida>0&&$nroPartida==(int)($nroPartida))||$nroPartida>$limite){
         echo "el valor ingresado es invalido, ingrese un numero: ";
         $nroPartida=trim(fgets(STDIN));
     }
@@ -264,24 +264,45 @@ do {
     switch ($opcion) {
         case 1: 
             // Juega una partida de WORDIX con el numero de palabra que el usuario elija
-            $cant=count($coleccionPalabras)-1;
+            $cant=count($coleccionPalabras);
             $nombreUsuario=solicitarJugador();
             echo "ingrese un numero de palabra del 1 al " . $cant . ": ";
             $numPalabra=trim(fgets(STDIN));
             $bandera=false;
-            for($i=0;$i<$cant&&!$bandera;$i++){
-                if($numPalabra==$numPalabrasUsadas[$i]||$numPalabra<=0||$numPalabra>$cant){
-                    echo "numero de palabra invalido o ya fue utilizado, elija otro";
+            $i=0;
+            $palabraOpcion1=$coleccionPalabras[$numPalabra-1];
+            $countPartidas=count($coleccionPartidas);
+            while ($i<$countPartidas && !$bandera){
+                if($coleccionPartidas[$i]["palabraWordix"]==$palabraOpcion1 && $coleccionPartidas[$i]["jugador"]==$nombreUsuario){
+                    echo "la palabra ya ha sido utilizada, elija otra: ";
                     $numPalabra=trim(fgets(STDIN));
+                    $palabraOpcion1=$coleccionPalabras[$numPalabra-1];
+                    $i=-1;
+                }if($i==$countPartidas-1){
+                    $bandera=true;
+                }
+                $i++;
+            }
+
+            if($bandera){
+                $partida=jugarWordix($palabraOpcion1,$nombreUsuario);
+                $coleccionPartidas[$countPartidas]=$partida; //carga la partida en el arreglo de partidas
+            }
+
+
+            /*while($i<$cant&&!$bandera){
+
+                if($numPalabra==$numPalabrasUsadas[$i]||$numPalabra<=0||$numPalabra>$cant){
+                    echo "Numero de palabra invalido o ya fue utilizado, elija otro: ";
+                    $numPalabra=trim(fgets(STDIN));   
                 }else{
                     $bandera=true;
-                    $palabraOpcion1=$coleccionPalabras[$numPalabra];
+                    $palabraOpcion1=$coleccionPalabras[$numPalabra-1];
                     $numPalabrasUsadas[$i]=$numPalabra;
                 }
-            }
-            $partida=jugarWordix($palabraOpcion1,$nombreUsuario);
-            $countPartidas=count($coleccionPartidas);
-            $coleccionPartidas[$countPartidas]=$partida; //carga la partida en el arreglo de partidas
+                $i++;
+            }*/
+           
             break;
         case 2: 
             // Juega una partida de WORDIX con una palabra aleatoria
@@ -308,8 +329,7 @@ do {
             break;
         case 4:
             // Muestra la primera partida ganada de un jugador seleccionado
-            echo "ingrese un nombre de usuario para ver su primera victoria: ";
-            $nombreUsuario=trim(fgets(STDIN));
+            $nombreUsuario=solicitarJugador();
             $indice=indicePartidaGanada($coleccionPartidas,$nombreUsuario);
             $limite=count($coleccionPartidas);
             
@@ -319,7 +339,7 @@ do {
                 echo "partida WORDIX " . $indice+1 . ": palabra " . $coleccionPartidas[$indice]["palabraWordix"] . "\n";
                 echo "jugador: " . $coleccionPartidas[$indice]["jugador"] . "\n";
                 echo "puntaje: " . $coleccionPartidas[$indice]["puntaje"] . "\n";
-                echo "puntaje: " . $coleccionPartidas[$indice]["intentos"] . "\n";
+                echo "intentos: " . $coleccionPartidas[$indice]["intentos"] . "\n";
                 echo "************************************************ \n";
             }else{
                 echo "el usuario ingresado no gano ninguna partida o no existe";
@@ -327,8 +347,7 @@ do {
             break;
         case 5:
             //Muestra el resumen de un jugador
-            echo "ingrese el jugador para mostrar su resumen: ";
-            $jugadorResumen=trim(fgets(STDIN));
+            $jugadorResumen=solicitarJugador();
             $limite=count($coleccionPartidas);
             $bandera=false;
             $arrayResumenJugador=resumen($coleccionPartidas,$jugadorResumen);
