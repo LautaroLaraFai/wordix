@@ -242,14 +242,12 @@ function ordenarPartidas($coleccionPartidas){
 // int $cant; $numPalabra; $i; $countPartidas; $valorMaximo; $indice; $victorias; $partidas
 //string $nombreUsuario; $numPalabra; $palabraOpcion1; $palabraWordix; $jugadorResumen
 //bool $bandera
-//array[] $coleccionPalabras; $numPalabrasUsadas; $coleccionPartidas; $partidaMostrada; $arrayResumenJugador
+//array[] $coleccionPalabras; $coleccionPartidas; $partidaMostrada; $arrayResumenJugador
 
 //Inicialización de variables:
 
 $coleccionPalabras=cargarColeccionPalabras();
 $coleccionPartidas=cargarPartidas();
-
-$numPalabrasUsadas[0]=-1; //caso 1
 
 $palabrasUsadas[0]="a"; //caso 2
 
