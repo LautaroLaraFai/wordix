@@ -127,15 +127,10 @@ function cargarColeccionPalabras(){
     //string $nombre
     echo "ingrese nombre de usuario: ";
     $nombre=trim(fgets(STDIN));
-    //$longitud=strlen($nombre);
-        /*if(!$longitud!=0){
-            echo "no ha ingresado ningun valor ";
-        }else{*/
-            while(!(ctype_alpha($nombre[0]))){ //verifica que la primera letra sea un string
-            echo "el primer digito tiene que ser una letra ";
-                $nombre=trim(fgets(STDIN));
-            }
-        //}
+    while(!(ctype_alpha($nombre[0]))){ //verifica que la primera letra sea un string
+        echo "el primer digito tiene que ser una letra ";
+        $nombre=trim(fgets(STDIN));
+    }
     $nombre=strtolower($nombre);
     return $nombre;
 
@@ -164,7 +159,7 @@ function mostrarPartida($coleccionPartidas){
         echo "el valor ingresado es invalido, ingrese un numero: ";
         $nroPartida=trim(fgets(STDIN)); //si el valor ingresado no cumple las condiciones vuelve a pedirlo
     }
-    echo "******************************************** \n";
+    echo "\n******************************************** \n";
     echo "partida WORDIX " . $nroPartida . ": palabra " .  $coleccionPartidas[$nroPartida-1]["palabraWordix"] . "\n";
     echo "jugador: " . $coleccionPartidas[$nroPartida-1]["jugador"] . "\n";
     echo "puntaje: " . $coleccionPartidas[$nroPartida-1]["puntaje"] . "\n";
@@ -330,12 +325,12 @@ do {
             
             
             if($indice>=0){
-                echo "\n ************************************************ \n";
+                echo "\n************************************************ \n";
                 echo "partida WORDIX " . $indice+1 . ": palabra " . $coleccionPartidas[$indice]["palabraWordix"] . "\n";
                 echo "jugador: " . $coleccionPartidas[$indice]["jugador"] . "\n";
                 echo "puntaje: " . $coleccionPartidas[$indice]["puntaje"] . "\n";
                 echo "intentos: " . $coleccionPartidas[$indice]["intentos"] . "\n";
-                echo "\n ************************************************ \n";
+                echo "************************************************ \n";
             }else{
                 echo "el usuario ingresado no gano ninguna partida o no existe";
             }
@@ -352,7 +347,7 @@ do {
             if($bandera){
                 $victorias=$arrayResumenJugador["victorias"];
                 $partidas=$arrayResumenJugador["partidas"];
-                echo "\n ******************************************** \n";
+                echo "\n******************************************** \n";
                 echo "Jugador: " . $arrayResumenJugador["jugador"] . "\n";
                 echo "Partidas: " . $arrayResumenJugador["partidas"] . "\n";
                 echo "puntaje total: " . $arrayResumenJugador["puntaje"] . "\n";
@@ -364,7 +359,7 @@ do {
                 echo "intento 4: " . $arrayResumenJugador["intento4"] . "\n";
                 echo "intento 5: " . $arrayResumenJugador["intento5"] . "\n";
                 echo "intento 6: " . $arrayResumenJugador["intento6"] . "\n";
-                echo "\n ******************************************** \n";
+                echo "******************************************** \n";
             }else{
                 echo "el usuario ingresado no ha jugado al wordix \n";
             }
@@ -386,9 +381,9 @@ do {
             }
             if(!$yaExiste){
                 $coleccionPalabras=agregarPalabra($coleccionPalabras,$palabra);
-                echo "Su palabra se ha añadido a WORDIX";            
+                echo "\n Su palabra se ha añadido a WORDIX \n";            
             }else{
-                echo "la palabra ya existe en WORDIX \n";
+                echo "\n la palabra ya existe en WORDIX \n";
             }
             
             break;}
