@@ -297,18 +297,33 @@ do {
             $valorMaximo=(count($coleccionPalabras)-1);
             $indice=rand(0,$valorMaximo);
             
-            $bandera=false;
-            $limite=count($palabrasUsadas);
+            $repetida=false;
+
+            //ejemplo
+            $cantPartidas=count($coleccionPartidas);
+            for($i=0;$i<$cantPartidas;$i++){
+                if($coleccionPartidas[$i]["palabraWordix"]==$coleccionPalabras[$indice] && $coleccionPartidas[$i]["jugador"]==$nombreUsuario){
+                    $repetida=true;
+                }
+            }
+
+
+
+            //fin ejemplo
+            /*$limite=count($palabrasUsadas);
             for($i=0;$i<$limite;$i++){
                 if($coleccionPalabras[$indice]==$palabrasUsadas){
                     $indice=rand(0,$valorMaximo);
                 }
-            }
+            }*/
+            if(!$repetida){
             $palabraWordix=$coleccionPalabras[$indice];
-            $palabrasUsadas=$coleccionPalabras[$indice];
+            //$palabrasUsadas=$coleccionPalabras[$indice];
             $partida=jugarWordix($palabraWordix,$nombreUsuario);
-            $countPartidas=count($coleccionPartidas);
-            $coleccionPartidas[$countPartidas]=$partida;
+            //$countPartidas=count($coleccionPartidas);
+            //$coleccionPartidas[$countPartidas]=$partida;
+            $coleccionPartidas[$cantPartidas]=$partida;
+            }
             break;
         case 3: 
             // Muestra una partida que el usuario elija
