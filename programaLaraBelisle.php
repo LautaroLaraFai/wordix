@@ -276,7 +276,7 @@ do {
                 if($coleccionPartidas[$i]["palabraWordix"]==$palabraOpcion1 && $coleccionPartidas[$i]["jugador"]==$nombreUsuario||!(is_numeric($numPalabra))||$numPalabra-1>$cant || !((int)($numPalabra)==$numPalabra)){  //verifica que la palabra no haya sido utilizada por el jugador, que sea un numero entero y que no se pase de los limites
                     echo "la palabra ya ha sido utilizada o es invalida, elija otra: ";
                     $numPalabra=trim(fgets(STDIN));
-                    if($numPalabra>0 && is_numeric($numPalabra) && (int)($numPalabra)==$numPalabra){   //se asegura que cuando se ingrese la palabra  sea un numero mayor a 0
+                    if($numPalabra>0 && is_numeric($numPalabra) && (int)($numPalabra)==$numPalabra && $numPalabra-1<$cant){   //se asegura que cuando se ingrese la palabra  sea un numero mayor a 0
                         $palabraOpcion1=$coleccionPalabras[$numPalabra-1]; //guarda la palabra que el usuario utilizo
                     }
                     $i=-1;
