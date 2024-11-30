@@ -151,8 +151,10 @@ function seleccionarOpcion(){
  */
 function mostrarPartida($coleccionPartidas){
      //int $nroPartida
-    echo "ingrese un numero de partida a ver: ";
-    $nroPartida=trim(fgets(STDIN));
+    $min=1;
+    $max=count($coleccionPartidas);
+    echo "ingrese un numero de partida a ver de 1 a " . $max . ": ";
+    $nroPartida=solicitarNumeroEntre($min, $max);
     $limite=count($coleccionPartidas);
     while(!(is_numeric($nroPartida)||$nroPartida>0&&$nroPartida==(int)($nroPartida))||$nroPartida>$limite){
         echo "el valor ingresado es invalido, ingrese un numero: ";
