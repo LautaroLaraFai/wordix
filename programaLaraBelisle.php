@@ -265,18 +265,22 @@ do {
             $cant=count($coleccionPalabras);
             $nombreUsuario=solicitarJugador();
             echo "ingrese un numero de palabra del 1 al " . $cant . ": ";
-            $numPalabra=trim(fgets(STDIN));
+            $min=1; 
+            $max=$cant; 
+            $numPalabra=solicitarNumeroEntre($min, $max);   //se asegura que los valores sean correctos y este dentro de los valores
+            $palabraOpcion1=$coleccionPalabras[$numPalabra-1];
+           
             $bandera=false;
             $i=0;
-            $palabraOpcion1=$coleccionPalabras[$numPalabra-1];
             $countPartidas=count($coleccionPartidas);
             while ($i<$countPartidas && !$bandera){
-                if($coleccionPartidas[$i]["palabraWordix"]==$palabraOpcion1 && $coleccionPartidas[$i]["jugador"]==$nombreUsuario){
-                    echo "la palabra ya ha sido utilizada, elija otra: ";
+                if($coleccionPartidas[$i]["palabraWordix"]==$palabraOpcion1 && $coleccionPartidas[$i]["jugador"]==$nombreUsuario||!(is_numeric($numPalabra))||$numPalabra-1>$cant){  
+                    echo "la palabra ya ha sido utilizada o es invalida, elija otra: ";
                     $numPalabra=trim(fgets(STDIN));
                     $palabraOpcion1=$coleccionPalabras[$numPalabra-1];
                     $i=-1;
                 }if($i==$countPartidas-1){
+                  
                     $bandera=true;
                 }
                 $i++;
@@ -284,7 +288,7 @@ do {
 
             if($bandera){
                 $partida=jugarWordix($palabraOpcion1,$nombreUsuario);
-                $coleccionPartidas[$countPartidas]=$partida; //carga la partida en el arreglo de partidas
+                $coleccionPartidas[$countPartidas]=$partida; //carga la partida en el arreglo de partidas 
             } 
             break;
         case 2: 
@@ -318,12 +322,12 @@ do {
             
             
             if($indice>=0){
-                echo "************************************************ \n";
+                echo "\n ************************************************ \n";
                 echo "partida WORDIX " . $indice+1 . ": palabra " . $coleccionPartidas[$indice]["palabraWordix"] . "\n";
                 echo "jugador: " . $coleccionPartidas[$indice]["jugador"] . "\n";
                 echo "puntaje: " . $coleccionPartidas[$indice]["puntaje"] . "\n";
                 echo "intentos: " . $coleccionPartidas[$indice]["intentos"] . "\n";
-                echo "************************************************ \n";
+                echo "\n ************************************************ \n";
             }else{
                 echo "el usuario ingresado no gano ninguna partida o no existe";
             }
@@ -340,7 +344,7 @@ do {
             if($bandera){
                 $victorias=$arrayResumenJugador["victorias"];
                 $partidas=$arrayResumenJugador["partidas"];
-                echo "********************************************";
+                echo "\n ******************************************** \n";
                 echo "Jugador: " . $arrayResumenJugador["jugador"] . "\n";
                 echo "Partidas: " . $arrayResumenJugador["partidas"] . "\n";
                 echo "puntaje total: " . $arrayResumenJugador["puntaje"] . "\n";
@@ -352,7 +356,7 @@ do {
                 echo "intento 4: " . $arrayResumenJugador["intento4"] . "\n";
                 echo "intento 5: " . $arrayResumenJugador["intento5"] . "\n";
                 echo "intento 6: " . $arrayResumenJugador["intento6"] . "\n";
-                echo "********************************************";
+                echo "\n ******************************************** \n";
             }else{
                 echo "el usuario ingresado no ha jugado al wordix \n";
             }
@@ -365,7 +369,19 @@ do {
         case 7:
             // Añade una palabra al Wordix
             $palabra=leerPalabra5Letras();
-            $coleccionPalabras=agregarPalabra($coleccionPalabras,$palabra);
-            echo "Su palabra se ha añadido a WORDIX";            
+            $cantPalabras=count($coleccionPalabras);
+            $yaExiste=false;
+            for($i=0;$i<$cantPalabras;$i++){
+                if($palabra==$coleccionPalabras[$i]){
+                    $yaExiste=true;
+                }
+            }
+            if(!$yaExiste){
+                $coleccionPalabras=agregarPalabra($coleccionPalabras,$palabra);
+                echo "Su palabra se ha añadido a WORDIX";            
+            }else{
+                echo "la palabra ya existe en WORDIX \n";
+            }
+            
             break;}
 } while ($opcion != 8);
