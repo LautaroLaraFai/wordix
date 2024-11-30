@@ -240,10 +240,10 @@ function ordenarPartidas($coleccionPartidas){
 
 //Declaración de variables:
 
-// int $cant; $numPalabra; $i; $countPartidas; $valorMaximo; $indice; $victorias; $partidas
-//string $nombreUsuario; $numPalabra; $palabraOpcion1; $palabraWordix; $jugadorResumen
-//bool $bandera
-//array[] $coleccionPalabras; $coleccionPartidas; $partidaMostrada; $arrayResumenJugador
+// int $cant, $min, $max, $numPalabra, $i, $countPartidas, $valorMaximo, $indice, $limite, $victorias, $partidas, $cantPartidas, $cantPalabras
+// string $opcion, $nombreUsuario, $palabraOpcion1, $palabraWordix, $palabra, $jugadorResumen
+// bool $bandera, $repetida, $yaExiste
+// array[] $coleccionPalabras, $coleccionPartidas, $arrayResumenJugador
 
 //Inicialización de variables:
 
@@ -273,10 +273,10 @@ do {
             $i=0;
             $countPartidas=count($coleccionPartidas);
             while ($i<$countPartidas && !$bandera){
-                if($coleccionPartidas[$i]["palabraWordix"]==$palabraOpcion1 && $coleccionPartidas[$i]["jugador"]==$nombreUsuario||!(is_numeric($numPalabra))||$numPalabra-1>$cant){  //verifica que la palabra no haya sido utilizada por el jugador, que sea un numero y que no se pase de los limites
+                if($coleccionPartidas[$i]["palabraWordix"]==$palabraOpcion1 && $coleccionPartidas[$i]["jugador"]==$nombreUsuario||!(is_numeric($numPalabra))||$numPalabra-1>$cant || !((int)($numPalabra)==$numPalabra)){  //verifica que la palabra no haya sido utilizada por el jugador, que sea un numero entero y que no se pase de los limites
                     echo "la palabra ya ha sido utilizada o es invalida, elija otra: ";
                     $numPalabra=trim(fgets(STDIN));
-                    if($numPalabra>0 && is_numeric($numPalabra)){   //se asegura que cuando se ingrese la palabra  sea un numero mayor a 0
+                    if($numPalabra>0 && is_numeric($numPalabra) && (int)($numPalabra)==$numPalabra){   //se asegura que cuando se ingrese la palabra  sea un numero mayor a 0
                         $palabraOpcion1=$coleccionPalabras[$numPalabra-1]; //guarda la palabra que el usuario utilizo
                     }
                     $i=-1;
