@@ -152,7 +152,7 @@ include_once("wordix.php");
     echo "6) Mostrar listados de partidas ordenados por jugador y palabra \n";
     echo "7) Agregar una palabra de 5 letras al wordix \n";
     echo "8) Salir \n";
-    
+
     $min=1;
     $max=8;
     $opcion=solicitarNumeroEntre($min, $max); // Se asegura que el numero ingresado este dentro de los limites del menu
@@ -367,7 +367,7 @@ do {
                 echo "Partidas: " . $arrayResumenJugador["partidas"] . "\n";
                 echo "puntaje total: " . $arrayResumenJugador["puntaje"] . "\n";
                 echo "Victorias: " . $arrayResumenJugador["victorias"] . "\n";
-                echo "Porcentaje Victorias: " . (int)($victorias/$partidas)*100  . "\n";
+                echo "Porcentaje Victorias: " . (int)(($victorias/$partidas)*100)  . "%\n";
                 echo "adivinadas: \n";
                 echo "intento 1: " . $arrayResumenJugador["intento1"] . "\n";
                 echo "intento 2: " . $arrayResumenJugador["intento2"] . "\n";
